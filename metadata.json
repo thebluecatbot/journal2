@@ -1,0 +1,6 @@
+{
+  "name": "Compass",
+  "description": "A private journal where users think out loud with Gemini and every entry produces actionable insights.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
