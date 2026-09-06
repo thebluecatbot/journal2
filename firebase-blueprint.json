@@ -1,0 +1,79 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "User profile metadata",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["uid"]
+    },
+    "JournalEntry": {
+      "title": "Journal Entry",
+      "description": "A private thinking session with Gemini",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "mode": { "type": "string" },
+        "status": { "type": "string", "enum": ["open", "closed"] },
+        "interactionId": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "closedAt": { "type": "string" },
+        "digest": { "type": "object" }
+      },
+      "required": ["status", "createdAt"]
+    },
+    "ConversationTurn": {
+      "title": "Conversation Turn",
+      "description": "A message turn between user and thinking partner",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "role": { "type": "string", "enum": ["user", "model"] },
+        "text": { "type": "string" },
+        "modelUsed": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["role", "text", "createdAt"]
+    },
+    "ActionItem": {
+      "title": "Action Item",
+      "description": "Actionable task distilled from a journal entry",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "what": { "type": "string" },
+        "due": { "type": "string" },
+        "effort": { "type": "string" },
+        "done": { "type": "boolean" },
+        "sourceEntryId": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["what", "done", "sourceEntryId"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Root user profile document"
+    },
+    "/users/{userId}/entries/{entryId}": {
+      "schema": "JournalEntry",
+      "description": "Journal entries created by the user"
+    },
+    "/users/{userId}/entries/{entryId}/turns/{turnId}": {
+      "schema": "ConversationTurn",
+      "description": "Turns of dialogue in a journal entry"
+    },
+    "/users/{userId}/actions/{actionId}": {
+      "schema": "ActionItem",
+      "description": "Action items distilled from user entries"
+    }
+  }
+}
