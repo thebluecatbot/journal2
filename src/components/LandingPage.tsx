@@ -31,14 +31,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onSignInSuccess }) => 
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#FCFCFB] text-[#1A1A1A] flex flex-col items-center justify-center p-6 select-none">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center p-6 select-none bg-[var(--bg)] text-[var(--text)]">
       <div className="flex flex-col items-center max-w-sm w-full space-y-8 text-center">
         {/* Minimal Compass Brand Mark */}
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center shadow-sm">
-            <div className="w-1.5 h-5 bg-white rotate-45 rounded-full" />
+          <div className="w-10 h-10 rounded-full flex items-center justify-center shadow-sm bg-[var(--accent)]">
+            <div className="w-1.5 h-5 rotate-45 rounded-full bg-[var(--text)]" />
           </div>
-          <span className="text-3xl font-medium tracking-tight italic font-serif text-[#1A1A1A]">
+          <span className="text-3xl font-medium tracking-tight italic font-user text-[var(--text)]">
             Compass
           </span>
         </div>
@@ -49,7 +49,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onSignInSuccess }) => 
             id="google-signin-button"
             onClick={handleSignIn}
             disabled={loading}
-            className="w-full max-w-xs flex items-center justify-center gap-3 px-6 py-3.5 bg-white border border-[#EBEBEB] rounded-full text-sm font-medium text-[#222] hover:bg-[#F9F9F8] hover:border-[#D8D8D8] transition-all shadow-sm active:scale-[0.99] disabled:opacity-50 cursor-pointer"
+            className="w-full max-w-xs flex items-center justify-center gap-3 px-6 py-3.5 rounded-full text-sm font-medium font-ai transition-all shadow-sm active:scale-[0.99] disabled:opacity-50 cursor-pointer bg-[var(--surface)] border border-[var(--border)] text-[var(--text)] hover:bg-[var(--bg-sunk)]"
           >
             {/* Google G Logo SVG */}
             <svg className="w-4 h-4" viewBox="0 0 24 24">
@@ -74,7 +74,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onSignInSuccess }) => 
           </button>
 
           {error && (
-            <p className="text-xs text-rose-600 font-medium mt-2 max-w-xs">{error}</p>
+            <p className="text-xs font-medium mt-2 max-w-xs font-ai text-[var(--danger)]">{error}</p>
           )}
         </div>
       </div>

@@ -1,0 +1,47 @@
+:root {
+  --bg:         #FDFBF7;
+  --bg-sunk:    #F4F1EA;
+  --surface:    #FFFFFF;
+  --border:     #E7E1D5;
+  --text:       #2C303A;
+  --text-muted: #6B6E78;
+  --accent:     #D9A05B;
+  --accent-ink: #7A5320;
+  --ai-ground:  #E8EFE7;
+  --ai-border:  #CBDBC7;
+  --warn:       #B4530A;
+  --danger:     #A32F26;
+
+  --font-user: "Crimson Pro", ui-serif, Georgia, serif;
+  --font-ai:   "Work Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:         #181713;
+    --bg-sunk:    #201F1A;
+    --surface:    #252420;
+    --border:     #38352E;
+    --text:       #F2EEE6;
+    --ai-ground:  #222A21;
+  }
+}
+
+.font-user { font-family: var(--font-user); }
+.font-ai   { font-family: var(--font-ai); }
+
+/* User-written body text: serif, generous size and leading, capped measure. */
+.text-user-body {
+  font-family: var(--font-user);
+  font-size: 19px;
+  line-height: 1.7;
+  max-width: 65ch;
+}
+
+/* AI-written panel: sans-serif on a soft green ground with a hairline green border. */
+.panel-ai {
+  background-color: var(--ai-ground);
+  border: 1px solid var(--ai-border);
+  font-family: var(--font-ai);
+  color: var(--text);
+}

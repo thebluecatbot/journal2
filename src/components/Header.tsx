@@ -30,13 +30,13 @@ export const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <header className="flex items-center justify-between px-8 py-4 border-b border-[#EBEBEB] bg-white flex-shrink-0 z-10">
+    <header className="flex items-center justify-between px-8 py-4 border-b flex-shrink-0 z-10 bg-[var(--surface)] border-[var(--border)]">
       {/* Brand */}
       <div className="flex items-center gap-3 cursor-pointer" onClick={onNewEntry}>
-        <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center flex-shrink-0">
-          <div className="w-1 h-4 bg-white rotate-45 rounded-full" />
+        <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-[var(--accent)]">
+          <div className="w-1 h-4 rotate-45 rounded-full bg-[var(--text)]" />
         </div>
-        <span className="text-xl font-medium tracking-tight italic font-serif text-[#1A1A1A]">
+        <span className="text-xl font-medium tracking-tight italic font-user text-[var(--text)]">
           Compass
         </span>
       </div>
@@ -45,12 +45,14 @@ export const Header: React.FC<HeaderProps> = ({
       <div className="flex items-center gap-6">
         {activeEntry && (
           <div className="flex items-center gap-2">
-            <span className="text-sm text-[#707070] font-normal truncate max-w-[280px]">
+            <span className="text-sm font-normal truncate max-w-[17.5rem] font-ai text-[var(--text-muted)]">
               {entryIndex !== undefined ? `Entry #${entryIndex}: ` : ""}
               {activeEntry.title || "Untitled Entry"}
             </span>
             {activeEntry.status === "closed" && (
-              <span className="text-[10px] uppercase tracking-wider font-semibold text-zinc-500 bg-zinc-100 px-2 py-0.5 rounded-full">
+              <span
+                className="text-[0.625rem] uppercase tracking-wider font-semibold px-2 py-0.5 rounded-full font-ai text-[var(--text)] bg-[var(--bg-sunk)] border border-[var(--border)]"
+              >
                 Closed
               </span>
             )}
@@ -62,11 +64,11 @@ export const Header: React.FC<HeaderProps> = ({
             <img
               src={user.photoURL}
               alt={user.displayName || "User"}
-              className="w-7 h-7 rounded-full object-cover border border-[#EBEBEB]"
+              className="w-7 h-7 rounded-full object-cover border border-[var(--border)]"
               referrerPolicy="no-referrer"
             />
           ) : (
-            <div className="w-7 h-7 rounded-full bg-[#E5E5E5] flex items-center justify-center text-[10px] font-bold text-[#444]">
+            <div className="w-7 h-7 rounded-full flex items-center justify-center text-[0.625rem] font-bold font-ai bg-[var(--bg-sunk)] text-[var(--text)]">
               {getInitials(user?.displayName, user?.email)}
             </div>
           )}
@@ -74,7 +76,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             id="signout-button"
             onClick={() => logOut()}
-            className="text-xs font-medium px-3 py-1.5 border border-[#EBEBEB] rounded-full hover:bg-gray-50 text-[#333] transition-colors cursor-pointer"
+            className="text-xs font-medium px-3 py-1.5 rounded-full transition-colors cursor-pointer font-ai border border-[var(--border)] text-[var(--text)] bg-[var(--surface)] hover:bg-[var(--bg-sunk)]"
           >
             Sign Out
           </button>

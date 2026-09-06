@@ -179,18 +179,18 @@ export const JournalConversation: React.FC<JournalConversationProps> = ({
   const isEntryClosed = entry.status === "closed";
 
   return (
-    <section className="rail-conversation-col flex flex-col border-r border-[#EBEBEB] bg-[#FAF9F6] h-full overflow-hidden">
+    <section className="rail-conversation-col flex flex-col border-r h-full overflow-hidden bg-[var(--bg-sunk)] border-[var(--border)]">
       {/* Scrollable Conversation Stream */}
       <div className="flex-1 p-8 space-y-8 overflow-y-auto">
         {turns.length === 0 && !isSending && (
           <div className="flex flex-col items-center justify-center h-full text-center py-16 px-6">
-            <div className="w-9 h-9 bg-stone-200/60 rounded-full flex items-center justify-center mb-3">
-              <div className="w-1.5 h-4 bg-stone-500 rotate-45 rounded-full" />
+            <div className="w-9 h-9 rounded-full flex items-center justify-center mb-3 bg-[var(--accent)]">
+              <div className="w-1.5 h-4 rotate-45 rounded-full bg-[var(--text)]" />
             </div>
-            <h3 className="text-base font-serif italic text-stone-700 mb-1">
+            <h3 className="text-base font-user italic mb-1 text-[var(--text)]">
               A private space to think out loud.
             </h3>
-            <p className="text-xs text-stone-500 max-w-sm leading-relaxed">
+            <p className="text-xs max-w-sm leading-relaxed font-ai text-[var(--text)]">
               Write as long and as freely as you wish. When you are ready for a thoughtful reflection, press Send. Or simply click Close Entry whenever you are done.
             </p>
           </div>
@@ -200,10 +200,10 @@ export const JournalConversation: React.FC<JournalConversationProps> = ({
           if (turn.role === "user") {
             return (
               <div key={turn.id} className="flex flex-col gap-2 max-w-[85%]">
-                <span className="text-[10px] uppercase tracking-widest text-[#999] font-semibold">
+                <span className="text-[0.625rem] uppercase tracking-widest font-semibold font-ai text-[var(--text-muted)]">
                   Journal Entry • {formatTurnTime(turn.createdAt)}
                 </span>
-                <p className="text-lg leading-relaxed text-[#2D2D2D] whitespace-pre-wrap font-sans">
+                <p className="text-user-body whitespace-pre-wrap text-[var(--text)]">
                   {turn.text}
                 </p>
               </div>
@@ -212,16 +212,16 @@ export const JournalConversation: React.FC<JournalConversationProps> = ({
 
           return (
             <div key={turn.id} className="flex flex-col gap-2 max-w-[85%] ml-auto items-end">
-              <span className="text-[10px] uppercase tracking-widest text-[#999] font-semibold flex items-center gap-1.5">
+              <span className="text-[0.625rem] uppercase tracking-widest font-semibold flex items-center gap-1.5 font-ai text-[var(--text-muted)]">
                 Gemini • Thinking Partner
                 {turn.modelUsed && (
-                  <span className="text-[9px] text-[#BBB] font-normal lowercase">
+                  <span className="text-[0.5625rem] font-normal lowercase text-[var(--text-muted)]">
                     ({turn.modelUsed})
                   </span>
                 )}
               </span>
-              <div className="bg-white p-5 rounded-2xl shadow-sm border border-[#F0F0F0] text-left">
-                <p className="text-lg leading-relaxed text-[#1A1A1A] whitespace-pre-wrap font-sans">
+              <div className="panel-ai p-5 rounded-2xl shadow-sm text-left">
+                <p className="text-base leading-relaxed whitespace-pre-wrap font-ai text-[var(--text)]">
                   {turn.text}
                 </p>
               </div>
@@ -232,20 +232,20 @@ export const JournalConversation: React.FC<JournalConversationProps> = ({
         {/* Real-time Streaming Indicator & Tokens */}
         {isSending && (
           <div className="flex flex-col gap-2 max-w-[85%] ml-auto items-end">
-            <span className="text-[10px] uppercase tracking-widest text-[#999] font-semibold">
+            <span className="text-[0.625rem] uppercase tracking-widest font-semibold font-ai text-[var(--text-muted)]">
               Gemini • Thinking Partner
             </span>
-            <div className="bg-white p-5 rounded-2xl shadow-sm border border-[#F0F0F0] text-left">
+            <div className="panel-ai p-5 rounded-2xl shadow-sm text-left">
               {streamingReply ? (
-                <p className="text-lg leading-relaxed text-[#1A1A1A] whitespace-pre-wrap font-sans">
+                <p className="text-base leading-relaxed whitespace-pre-wrap font-ai text-[var(--text)]">
                   {streamingReply}
-                  <span className="inline-block w-1.5 h-4 ml-1 bg-black animate-pulse" />
+                  <span className="inline-block w-1.5 h-4 ml-1 animate-pulse bg-[var(--text)]" />
                 </p>
               ) : (
                 <div className="flex items-center gap-2 py-1">
-                  <div className="w-2 h-2 bg-stone-400 rounded-full animate-bounce [animation-delay:-0.3s]" />
-                  <div className="w-2 h-2 bg-stone-400 rounded-full animate-bounce [animation-delay:-0.15s]" />
-                  <div className="w-2 h-2 bg-stone-400 rounded-full animate-bounce" />
+                  <div className="w-2 h-2 rounded-full animate-bounce [animation-delay:-0.3s] bg-[var(--text-muted)]" />
+                  <div className="w-2 h-2 rounded-full animate-bounce [animation-delay:-0.15s] bg-[var(--text-muted)]" />
+                  <div className="w-2 h-2 rounded-full animate-bounce bg-[var(--text-muted)]" />
                 </div>
               )}
             </div>
@@ -254,9 +254,9 @@ export const JournalConversation: React.FC<JournalConversationProps> = ({
 
         {/* Distilling Indicator */}
         {isClosing && (
-          <div className="flex flex-col items-center justify-center p-6 bg-white/70 rounded-xl border border-[#EBEBEB] text-center space-y-2">
-            <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin" />
-            <span className="text-xs uppercase tracking-widest text-[#666] font-semibold">
+          <div className="flex flex-col items-center justify-center p-6 rounded-xl text-center space-y-2 bg-[var(--surface)] border border-[var(--border)]">
+            <div className="w-5 h-5 border-2 rounded-full animate-spin border-[var(--text)] border-t-transparent" />
+            <span className="text-xs uppercase tracking-widest font-semibold font-ai text-[var(--text)]">
               Distilling your entry into themes, mood & next actions...
             </span>
           </div>
@@ -266,24 +266,30 @@ export const JournalConversation: React.FC<JournalConversationProps> = ({
       </div>
 
       {/* Input / Free-Writing Bottom Bar */}
-      <div className="p-6 bg-white border-t border-[#EBEBEB] flex-shrink-0">
+      <div className="p-6 border-t flex-shrink-0 bg-[var(--surface)] border-[var(--border)]">
         {/* Inline Error Banner Above Composer with Retry Button */}
         {inlineError && (
           <div
             id="composer-inline-error-banner"
-            className="mb-3 p-3.5 bg-red-50 border border-red-200 rounded-xl flex items-center justify-between gap-3 text-xs text-red-800"
+            className="mb-3 p-3.5 rounded-xl flex items-center justify-between gap-3 text-xs"
+            style={{
+              backgroundColor: "color-mix(in srgb, var(--danger) 10%, var(--surface))",
+              border: "1px solid color-mix(in srgb, var(--danger) 35%, var(--border))",
+              color: "var(--danger)",
+            }}
           >
             <div className="flex items-center gap-2">
-              <svg className="w-4 h-4 text-red-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
               </svg>
-              <span className="font-medium">{inlineError}</span>
+              <span className="font-medium font-ai">{inlineError}</span>
             </div>
             <button
               id="composer-retry-button"
               onClick={handleSend}
               disabled={isSending}
-              className="px-3.5 py-1.5 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg text-xs transition-colors cursor-pointer flex-shrink-0 shadow-xs"
+              className="px-3.5 py-1.5 font-medium rounded-lg text-xs font-ai transition-colors cursor-pointer flex-shrink-0 shadow-xs text-[var(--surface)] hover:brightness-110"
+              style={{ backgroundColor: "var(--danger)" }}
             >
               Retry
             </button>
@@ -291,17 +297,17 @@ export const JournalConversation: React.FC<JournalConversationProps> = ({
         )}
 
         {isEntryClosed ? (
-          <div className="flex items-center justify-between py-2 px-3 bg-[#FAF9F6] rounded-xl border border-[#EBEBEB]">
+          <div className="flex items-center justify-between py-2 px-3 rounded-xl bg-[var(--bg-sunk)] border border-[var(--border)]">
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 bg-emerald-500 rounded-full" />
-              <span className="text-xs font-medium text-[#555]">
+              <span className="w-2 h-2 rounded-full bg-[var(--accent)]" />
+              <span className="text-xs font-medium font-ai text-[var(--text)]">
                 This entry is closed and preserved. Actions and themes are recorded in your Action Rail.
               </span>
             </div>
             {onNewEntryRequested && (
               <button
                 onClick={onNewEntryRequested}
-                className="px-4 py-1.5 bg-black text-white rounded-lg text-xs font-medium hover:bg-zinc-800 transition-colors cursor-pointer"
+                className="px-4 py-1.5 rounded-lg text-xs font-medium font-ai transition-colors cursor-pointer bg-[var(--accent)] text-[var(--text)] hover:brightness-95"
               >
                 + New Entry
               </button>
@@ -322,14 +328,14 @@ export const JournalConversation: React.FC<JournalConversationProps> = ({
               }}
               placeholder="Think out loud..."
               disabled={isSending || isClosing}
-              className="w-full p-4 pr-48 bg-[#F5F5F5] border-none rounded-xl focus:ring-1 focus:ring-black outline-none text-base resize-none min-h-[58px] max-h-[180px] font-sans text-[#1A1A1A] placeholder:text-[#999] leading-relaxed"
+              className="w-full p-4 pr-48 border rounded-xl outline-none resize-none min-h-[3.625rem] max-h-[11.25rem] font-user text-lg leading-relaxed bg-[var(--bg)] border-[var(--border)] text-[var(--text)] placeholder:text-[var(--text-muted)] focus:ring-1 focus:ring-[var(--accent)]"
             />
             <div className="absolute right-2 bottom-2.5 flex items-center gap-2">
               <button
                 id="send-turn-button"
                 onClick={handleSend}
                 disabled={!draft.trim() || isSending || isClosing}
-                className="px-4 py-2 bg-black text-white rounded-lg text-sm font-medium hover:bg-zinc-800 transition-colors disabled:opacity-40 disabled:hover:bg-black cursor-pointer"
+                className="px-4 py-2 rounded-lg text-sm font-medium font-ai transition-colors disabled:opacity-40 cursor-pointer bg-[var(--accent)] text-[var(--text)] hover:brightness-95"
               >
                 {isSending ? "Sending..." : "Send"}
               </button>
@@ -337,7 +343,7 @@ export const JournalConversation: React.FC<JournalConversationProps> = ({
                 id="close-entry-button"
                 onClick={handleCloseEntry}
                 disabled={isClosing || isSending || (turns.length === 0 && !draft.trim())}
-                className="px-4 py-2 border border-[#EBEBEB] bg-white rounded-lg text-sm font-medium text-[#222] hover:bg-gray-50 transition-colors disabled:opacity-40 cursor-pointer"
+                className="px-4 py-2 border rounded-lg text-sm font-medium font-ai transition-colors disabled:opacity-40 cursor-pointer border-[var(--border)] bg-[var(--surface)] text-[var(--text)] hover:bg-[var(--bg-sunk)]"
               >
                 {isClosing ? "Distilling..." : "Close Entry"}
               </button>

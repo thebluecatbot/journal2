@@ -1,18 +1,15 @@
 @import "tailwindcss";
+@import "./tokens.css";
 
 @layer base {
   body {
-    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background-color: #FCFCFB;
-    color: #1A1A1A;
-  }
-
-  .font-serif {
-    font-family: 'Newsreader', Georgia, Cambria, 'Times New Roman', Times, serif;
+    font-family: var(--font-ai);
+    background-color: var(--bg);
+    color: var(--text);
   }
 }
 
-/* Responsive layout: Below 900px, the Action Rail stacks directly below conversation */
+/* Responsive layout: below 900px the Action Rail stacks under conversation. */
 @media (max-width: 899px) {
   .rail-layout-container {
     flex-direction: column !important;
@@ -22,7 +19,7 @@
   .rail-conversation-col {
     width: 100% !important;
     border-right: none !important;
-    border-bottom: 1px solid #EBEBEB !important;
+    border-bottom: 1px solid var(--border) !important;
     min-height: 520px !important;
     height: auto !important;
     flex-shrink: 0 !important;
@@ -43,7 +40,7 @@
   }
   .rail-conversation-col {
     width: 62% !important;
-    border-right: 1px solid #EBEBEB !important;
+    border-right: 1px solid var(--border) !important;
     border-bottom: none !important;
     height: 100% !important;
   }

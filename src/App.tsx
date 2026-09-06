@@ -114,12 +114,12 @@ export default function App() {
   // Loading initial authentication state
   if (authLoading) {
     return (
-      <div className="h-screen w-screen bg-[#FCFCFB] flex items-center justify-center">
+      <div className="h-screen w-screen flex items-center justify-center bg-[var(--bg)]">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center animate-pulse">
-            <div className="w-1 h-4 bg-white rotate-45 rounded-full" />
+          <div className="w-8 h-8 rounded-full flex items-center justify-center animate-pulse bg-[var(--accent)]">
+            <div className="w-1 h-4 rotate-45 rounded-full bg-[var(--text)]" />
           </div>
-          <span className="text-xs uppercase tracking-widest text-[#999] font-medium font-sans">
+          <span className="text-xs uppercase tracking-widest font-medium font-ai text-[var(--text-muted)]">
             Opening Compass...
           </span>
         </div>
@@ -144,7 +144,7 @@ export default function App() {
     null;
 
   return (
-    <div className="flex flex-col min-h-screen min-[900px]:h-screen w-screen bg-[#FCFCFB] text-[#1A1A1A] font-sans overflow-x-hidden min-[900px]:overflow-hidden">
+    <div className="flex flex-col min-h-screen min-[900px]:h-screen w-screen font-ai overflow-x-hidden min-[900px]:overflow-hidden bg-[var(--bg)] text-[var(--text)]">
       {/* Top Header */}
       <Header
         user={currentUser}
@@ -154,11 +154,19 @@ export default function App() {
       />
 
       {entryCreationError && (
-        <div className="bg-rose-50 border-b border-rose-200 px-6 py-2 text-xs font-medium text-rose-700 flex items-center justify-between z-20">
+        <div
+          className="px-6 py-2 text-xs font-medium flex items-center justify-between z-20 border-b"
+          style={{
+            backgroundColor: "color-mix(in srgb, var(--danger) 10%, var(--bg))",
+            borderColor: "color-mix(in srgb, var(--danger) 35%, var(--border))",
+            color: "var(--danger)",
+          }}
+        >
           <span>{entryCreationError}</span>
           <button
             onClick={() => setEntryCreationError(null)}
-            className="text-rose-500 hover:text-rose-800 text-xs cursor-pointer ml-4 font-bold"
+            className="text-xs cursor-pointer ml-4 font-bold hover:opacity-70"
+            style={{ color: "var(--danger)" }}
           >
             ×
           </button>
@@ -179,10 +187,10 @@ export default function App() {
             onNewEntryRequested={handleCreateNewEntry}
           />
         ) : (
-          <div className="rail-conversation-col flex items-center justify-center border-r border-[#EBEBEB] bg-[#FAF9F6]">
+          <div className="rail-conversation-col flex items-center justify-center border-r bg-[var(--bg-sunk)] border-[var(--border)]">
             <button
               onClick={handleCreateNewEntry}
-              className="px-5 py-2.5 bg-black text-white rounded-xl text-sm font-medium hover:bg-zinc-800 transition-colors"
+              className="px-5 py-2.5 rounded-xl text-sm font-medium transition-colors bg-[var(--accent)] text-[var(--text)] hover:brightness-95 font-ai"
             >
               + Start a New Entry
             </button>
