@@ -123,11 +123,11 @@ Cloud Run hosts the container. GEMINI_API_KEY is mounted from Secret Manager and
 
 Tick all five:
 
-- [x] **User authentication via Firebase** — Google Sign-In only, `verifyIdToken` on every route
-- [x] **Multi-turn interaction with the Gemini API** — Interactions API, `previous_interaction_id` read from the caller's own entry document
-- [x] **User-isolated Firestore document storage** — `/users/{uid}/**`, default-deny rules
-- [x] **Secure API key retrieval via Google Cloud Secret Manager** — `--set-secrets`, server-side only
-- [x] **Others** — mentioned in the description and detailed in the README: five method-backed journalling modes, a spatial brainstorm canvas with SCAMPER, an Insights view, and a separate MCP server
+- [x] **User authentication via Firebase**   Google Sign-In only, `verifyIdToken` on every route
+- [x] **Multi-turn interaction with the Gemini API**   Interactions API, `previous_interaction_id` read from the caller's own entry document
+- [x] **User-isolated Firestore document storage**   `/users/{uid}/**`, default-deny rules
+- [x] **Secure API key retrieval via Google Cloud Secret Manager**   `--set-secrets`, server-side only
+- [x] **Others**   mentioned in the description and detailed in the README: five method-backed journalling modes, a spatial brainstorm canvas with SCAMPER, an Insights view, and a separate MCP server
 
 ---
 
