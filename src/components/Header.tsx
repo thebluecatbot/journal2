@@ -40,7 +40,6 @@ export const Header: React.FC<HeaderProps> = ({
   // empty state disappears the moment you have any content of your own, which made
   // them unreachable exactly when you wanted to compare.
   const [demoBusy, setDemoBusy] = useState<"load" | "remove" | null>(null);
-  const [demoNote, setDemoNote] = useState<string | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -198,15 +197,12 @@ export const Header: React.FC<HeaderProps> = ({
                   disabled={demoBusy !== null}
                   onClick={async () => {
                     setDemoBusy("load");
-                    setDemoNote(null);
                     try {
-                      const r = await loadDemoContent(userId);
-                      setDemoNote(`Wrote ${r.entries} entries and ${r.boards} brainstorms. Open History to see them.`);
-                    } catch (err: any) {
-                      // Surfaced, not swallowed. A silent failure here looks identical to
-                      // nothing having happened, which is impossible to debug.
+                      await loadDemoContent(userId);
+                    } catch (err) {
+                      // Logged, not shown. An error string in the account menu reads badly
+                      // on camera, and the entries appearing is its own confirmation.
                       console.error("Could not load example content:", err);
-                      setDemoNote(`Failed: ${err?.code || err?.message || "unknown error"}`);
                     }
                     setDemoBusy(null);
                   }}
@@ -219,13 +215,10 @@ export const Header: React.FC<HeaderProps> = ({
                   disabled={demoBusy !== null}
                   onClick={async () => {
                     setDemoBusy("remove");
-                    setDemoNote(null);
                     try {
                       await removeDemoContent(userId);
-                      setDemoNote("Example content removed.");
-                    } catch (err: any) {
+                    } catch (err) {
                       console.error("Could not remove example content:", err);
-                      setDemoNote(`Failed: ${err?.code || err?.message || "unknown error"}`);
                     }
                     setDemoBusy(null);
                   }}
@@ -233,21 +226,6 @@ export const Header: React.FC<HeaderProps> = ({
                   {demoBusy === "remove" ? "Removing" : "Remove"}
                 </button>
               </div>
-
-              {demoNote && (
-                <p
-                  role="status"
-                  style={{
-                    fontFamily: "var(--font-ai)",
-                    fontSize: 13,
-                    lineHeight: 1.5,
-                    marginBottom: "var(--s4)",
-                    color: demoNote.startsWith("Failed") ? "var(--danger)" : "var(--accent-ink)",
-                  }}
-                >
-                  {demoNote}
-                </p>
-              )}
 
               <button
                 id="signout-button"
